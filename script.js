@@ -1,13 +1,11 @@
-//TODO: Include your multi-line comment header
 /*
-    Name: 
-    Date: 
-    Assignment: 
-    Quarter: 
-    Instructor: 
+    Name: Kyle H
+    Date: September 20, 2026
+    Assignment: Module 1 Applied Programming Activity
+    Trimester: 1
+    Instructor: Lisa Thoendel
 */
 
-// TODO: Import "use strict" directive
 "use strict";
 
 // DO NOT MODIFY
@@ -17,37 +15,41 @@ const display = (label, value) =>
 
 // ADD YOUR CODE BELOW
 
-// TODO: Create variables for your name (string), total number of modules for our class (number), and if you're enrolled (boolean)
-name;
-totalModules;
-isEnrolled;
+// Create variables for name, total modules, and enrollment
+const name = "Kyle H";
+const totalModules = 10;
+const isEnrolled = true;
 
-// TODO: Use a template literal to output a welcome message. Use at least one ${}.
+// Create a welcome message using a template literal
+const welcomeMessage = `Welcome to the course, ${name}!`;
 
-// TODO: Calculate the total study hours for the course. There are 10 modules. Each module takes roughly 6 hours.
-// Formula: totalStudyHours = totalModules * hoursPerWeek
+// Calculate total study hours
+const hoursPerModule = 6;
+const totalStudyHours = totalModules * hoursPerModule;
 
-// TODO: Calculate the number of study hours each day. Convert the output to minutes (this formula is not provided).
-// Formula: dailyStudyHours = hoursPerWeek / 7
+// Calculate daily study hours and minutes
+const dailyStudyHours = totalStudyHours / 7;
+const dailyStudyMinutes = dailyStudyHours * 60;
 
-// TODO: Give yourself a rest day and exclude one day out of your week. Calculate the new number of hours and set it to adjustedDailyHours. Convert the output to minutes (this formula is not provided).
+// Calculate daily study hours and minutes with one rest day
+const adjustedDailyHours = totalStudyHours / 6;
+const adjustedDailyMinutes = adjustedDailyHours * 60;
 
-// TODO: Calculate the course percent complete and the course percent remaining. Imagine you've completed 2 modules (Start Here and Module 1).
-// Formula: percent = (part / whole) * 100
+// Calculate course percent complete and remaining
+const completedModules = 1;
+const percentComplete = (completedModules / totalModules) * 100;
+const percentRemaining = 100 - percentComplete;
 
 // DISPLAY RESULTS
 
-// TODO: Display your results. Use the correct variables and avoid hard-coding the data below.
-// TODO: Adjust all decimals to two places.
-display("Welcome Message");
-display("My Name");
-display("Enrolled");
-display("Total Modules");
-display("Daily Study Hours (7 days)");
-display("Daily Study Minutes (7 days)");
-display("Daily Study Hours (with rest day)");
-display("Daily Study Minutes (with rest day)");
+display("Welcome Message", welcomeMessage);
+display("My Name", name);
+display("Enrolled", isEnrolled);
+display("Total Modules", totalModules);
+display("Daily Study Hours (7 days)", dailyStudyHours);
+display("Daily Study Minutes (7 days)", dailyStudyMinutes);
+display("Daily Study Hours (with rest day)", adjustedDailyHours);
+display("Daily Study Minutes (with rest day)", adjustedDailyMinutes);
 
-// TODO: Display your results with a % sign
-display("Percent Complete");
-display("Percent Remaining");
+display("Percent Complete", `${percentComplete}%`);
+display("Percent Remaining", `${percentRemaining}%`);
