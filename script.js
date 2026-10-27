@@ -1,10 +1,10 @@
 
 /*
     Name: Kyle H
-    Date: October 18, 2026
-    Assignment: Module 5 Applied Programming Activity
+    Date: October 26, 2026
+    Assignment: Module 6 Applied Programming Activity
     Trimester: 1
-    Instructor:
+    Instructor: Lisa Thoendel
 */
 
 "use strict";
@@ -32,7 +32,11 @@ const generateButton = document.getElementById("generateButton");
 const resetButton = document.getElementById("resetButton");
 const output = document.getElementById("output");
 
-// Study Calculations
+// Module 6: Joke and Quote DOM Elements
+const jokeContainer = document.getElementById("jokeContainer");
+const quoteContainer = document.getElementById("quoteContainer");
+
+// Part 2: Study Calculations
 const hoursPerModule = 6;
 
 const calculateStudyHours = (modules, hoursPerModule = 6) =>
@@ -41,7 +45,7 @@ const calculateStudyHours = (modules, hoursPerModule = 6) =>
 const calculatePercentComplete = (completed, total) =>
   (completed / total) * 100;
 
-// Part 2: Get Course Progress
+// Part 3: Get Course Progress
 const getCourseProgress = (percentRemaining) => {
   if (percentRemaining === 0) {
     return "Current Progress: Finished!";
@@ -54,7 +58,7 @@ const getCourseProgress = (percentRemaining) => {
   }
 };
 
-// Part 3: Get Course Grade
+// Part 4: Get Course Grade
 const getCourseGrade = (percentComplete) => {
   if (percentComplete >= 90) {
     return "Course Grade: A";
@@ -69,7 +73,7 @@ const getCourseGrade = (percentComplete) => {
   }
 };
 
-// Part 4: Get Study Plan
+// Part 5: Get Study Plan
 const getStudyPlan = (studyDay) => {
   const totalStudyHours = calculateStudyHours(
     courseModules.length,
@@ -116,7 +120,7 @@ const getStudyPlan = (studyDay) => {
   return studyPlan;
 };
 
-// Part 5: Display Modules
+// Part 6: Display Modules
 const displayModules = (modules) => {
   const list = document.createElement("ul");
 
@@ -140,7 +144,7 @@ const displayRemainingModules = (completedModules) => {
   );
 };
 
-// Part 6: Apply Dashboard Color
+// Part 7: Apply Dashboard Color
 const applyDashboardColor = (percentComplete) => {
   if (percentComplete >= 75) {
     output.style.backgroundColor = "#d4edda";
@@ -151,7 +155,7 @@ const applyDashboardColor = (percentComplete) => {
   }
 };
 
-// Part 7: Validate Inputs
+// Part 8: Validate Inputs
 const validateInputs = (
   studentName,
   completedModules,
@@ -182,7 +186,7 @@ const validateInputs = (
   }
 };
 
-// Part 8: Generate Dashboard with Error Handling
+// Part 9: Generate Dashboard with Error Handling
 const generateDashboard = () => {
   try {
     const studentName = studentNameInput.value.trim();
@@ -229,7 +233,7 @@ const generateDashboard = () => {
       studyPlan = getStudyPlan(studyDay);
     }
 
-    // Part 9: Console Logs
+    // Display console information
     console.log("Student Name:", studentName);
     console.log("Completed Modules:", completedModules);
     console.log("Study Day:", studyDay);
@@ -314,7 +318,6 @@ const displayDashboard = (
 
 // Part 11: Reset Dashboard
 const resetDashboard = () => {
-  // Log the existing input values before resetting
   console.log("Student Name before reset:", studentNameInput.value);
   console.log(
     "Completed Modules before reset:",
@@ -406,7 +409,69 @@ const runUnitTests = () => {
   console.log("Tests failed:", failedTests);
 };
 
-// Part 13: Button Event Listeners
+// Part 13: Get and Display a Random Joke
+const getJoke = async () => {
+  const response = await fetch(
+    "https://official-joke-api.appspot.com/random_joke"
+  );
+
+  if (!response.ok) {
+    throw new Error("Unable to fetch joke.");
+  }
+
+  const data = await response.json();
+
+  return data;
+};
+
+const displayJoke = async () => {
+  try {
+    jokeContainer.textContent = "Loading joke...";
+
+    const joke = await getJoke();
+
+    jokeContainer.innerHTML = `
+      <p>${joke.setup}</p>
+      <p>${joke.punchline}</p>
+    `;
+  } catch (error) {
+    jokeContainer.textContent = "Unable to load joke.";
+    console.error("Error loading joke:", error);
+  }
+};
+
+// Part 14: Get and Display a Random Quote
+const getQuote = async () => {
+  const response = await fetch(
+    "https://dummyjson.com/quotes/random"
+  );
+
+  if (!response.ok) {
+    throw new Error("Unable to fetch quote.");
+  }
+
+  const data = await response.json();
+
+  return data;
+};
+
+const displayQuote = async () => {
+  try {
+    quoteContainer.textContent = "Loading quote...";
+
+    const quote = await getQuote();
+
+    quoteContainer.innerHTML = `
+      <p>"${quote.quote}"</p>
+      <p><strong>— ${quote.author}</strong></p>
+    `;
+  } catch (error) {
+    quoteContainer.textContent = "Unable to load quote.";
+    console.error("Error loading quote:", error);
+  }
+};
+
+// Part 15: Button Event Listeners
 generateButton.addEventListener("click", () => {
   generateDashboard();
 });
@@ -414,3 +479,7 @@ generateButton.addEventListener("click", () => {
 resetButton.addEventListener("click", () => {
   resetDashboard();
 });
+
+// Part 16: Load Joke and Quote When the Page Opens
+displayJoke();
+displayQuote();
