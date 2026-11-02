@@ -1,5 +1,3 @@
-
-
 /*
     Name: Kyle H
     Date: November 1, 2026
